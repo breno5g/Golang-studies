@@ -10,22 +10,26 @@ const prefixoOlaPortugues = "Olá, " // const padrão
 const prefixoOlaEspanhol = "Hola, "
 const prefixoOlaFrances = "Bonjour, "
 
+func prefixodeSaudacao(idioma string) (prefixo string) {
+	// A definição da variavel de retorno está sendo feita em cima
+	switch idioma {
+	case frances:
+		prefixo = prefixoOlaFrances
+	case espanhol:
+		prefixo = prefixoOlaEspanhol
+	default:
+		prefixo = prefixoOlaPortugues
+	}
+	return // Como já definimos o retorno acima, não é preciso aqui
+}
+
 func Ola(name string, idioma string) string {
 	// Declaração de função com tipagem de parametro e retorno
 	if name == "" {
 		name = "Mundo"
 	}
 
-	prefixo := prefixoOlaPortugues
-
-	switch idioma {
-	case espanhol:
-		prefixo = prefixoOlaEspanhol
-	case frances:
-		prefixo = prefixoOlaFrances
-	}
-
-	return prefixo + name // Concatenação basica
+	return prefixodeSaudacao(idioma) + name // Concatenação basica
 }
 
 func main() { // Função principal que o go chama ao executar o código
