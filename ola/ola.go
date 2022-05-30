@@ -1,6 +1,8 @@
 package main
 
-import "fmt" // Módulo nativo do go
+import (
+	"fmt" // Módulo nativo do go
+)
 
 const espanhol = "espanhol"
 const frances = "francês"
@@ -14,15 +16,16 @@ func Ola(name string, idioma string) string {
 		name = "Mundo"
 	}
 
-	if idioma == espanhol {
-		return prefixoOlaEspanhol + name
+	prefixo := prefixoOlaPortugues
+
+	switch idioma {
+	case espanhol:
+		prefixo = prefixoOlaEspanhol
+	case frances:
+		prefixo = prefixoOlaFrances
 	}
 
-	if idioma == frances {
-		return prefixoOlaFrances + name
-	}
-
-	return prefixoOlaPortugues + name // Concatenação basica
+	return prefixo + name // Concatenação basica
 }
 
 func main() { // Função principal que o go chama ao executar o código
