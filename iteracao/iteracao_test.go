@@ -20,3 +20,12 @@ func TestRepetir(t *testing.T) {
 		}
 	})
 }
+
+// Comando bonito pra rodar o benchmark
+// go test -bench=.
+
+func BenchmarkIteracao(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		Repetir("a", 0)
+	}
+}
