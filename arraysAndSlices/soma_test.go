@@ -1,6 +1,9 @@
 package main
 
-import "testing"
+import (
+	"reflect"
+	"testing"
+)
 
 func TestSoma(t *testing.T) {
 
@@ -29,4 +32,20 @@ func TestSoma(t *testing.T) {
 		}
 	})
 
+}
+
+func TestSomaTudo(t *testing.T) {
+
+	resultado := SomaTudo([]int{1, 2}, []int{0, 9})
+	esperado := []int{3, 9}
+
+	// O == não consegue fazer deep equal, então dá erro
+	// if resultado != esperado {
+	// 	t.Errorf("resultado %v esperado %v", resultado, esperado)
+	// }
+
+	// reflect.DeepEqual não valida os tipos, então ele compila o código mesmo assim
+	if !reflect.DeepEqual(resultado, esperado) {
+		t.Errorf("recebido %v esperado %v", resultado, esperado)
+	}
 }

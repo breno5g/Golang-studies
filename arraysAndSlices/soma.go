@@ -25,3 +25,22 @@ func Soma(numeros []int) int {
 	}
 	return sum
 }
+
+func SomaTudo(numerosParaSomar ...[]int) (somas []int) {
+	// len === .length
+	quantidadeDeNumeros := len(numerosParaSomar)
+	// Make cria um array com a quantidade inicial de "quantidade de numeros"
+	somas = make([]int, quantidadeDeNumeros)
+
+	// fmt.Println(numerosParaSomar)
+	for i, numeros := range numerosParaSomar {
+		// Numeros === array
+		somas[i] = Soma(numeros)
+	}
+
+	return
+}
+
+func main() {
+	SomaTudo([]int{1, 2}, []int{0, 9})
+}
