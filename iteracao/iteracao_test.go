@@ -1,6 +1,9 @@
 package iteracao
 
-import "testing"
+import (
+	"fmt"
+	"testing"
+)
 
 func TestRepetir(t *testing.T) {
 	t.Run("Testa se repete 5 vezes / default", func(t *testing.T) {
@@ -24,8 +27,14 @@ func TestRepetir(t *testing.T) {
 // Comando bonito pra rodar o benchmark
 // go test -bench=.
 
-func BenchmarkIteracao(b *testing.B) {
+func BenchmarkRepetir(b *testing.B) {
 	for i := 0; i < b.N; i++ {
 		Repetir("a", 0)
 	}
+}
+
+func ExampleRepetir() {
+	res := Repetir("a", 10)
+	fmt.Println(res)
+	// Output: aaaaaaaaaa
 }
