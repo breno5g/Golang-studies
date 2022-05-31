@@ -51,6 +51,20 @@ func SomaTudo(numerosParaSomar ...[]int) []int {
 	return somas
 }
 
+func SomaTodoOResto(numerosParaSomar ...[]int) []int {
+	var somas []int
+	for _, numeros := range numerosParaSomar {
+		// isso é dar um slice no array, ele pega da posição passada como primeiro parametro até a do segundo
+		// Se você omitir o segundo parametro, ele vai do primeiro até o final
+		// O inverso também vale
+		final := numeros[1:]
+		somas = append(somas, Soma(final))
+	}
+
+	return somas
+}
+
 func main() {
 	SomaTudo([]int{1, 2}, []int{0, 9})
+	SomaTodoOResto([]int{1, 2, 3, 4}, []int{10, 20, 30})
 }

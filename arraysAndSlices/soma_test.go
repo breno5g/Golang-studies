@@ -49,3 +49,12 @@ func TestSomaTudo(t *testing.T) {
 		t.Errorf("recebido %v esperado %v", resultado, esperado)
 	}
 }
+
+func TestSomaTodoOResto(t *testing.T) {
+	resultado := SomaTodoOResto([]int{1, 2}, []int{0, 9})
+	esperado := []int{2, 9}
+
+	if !reflect.DeepEqual(resultado, esperado) {
+		t.Errorf("resultado %v, esperado %v", resultado, esperado)
+	}
+}
