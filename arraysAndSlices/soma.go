@@ -8,9 +8,18 @@ package main
 // 	return sum
 // }
 
-func Soma(numeros [5]int) int {
+// func Soma(numeros [5]int) int {
+// 	sum := 0
+// 	// Range é tipo a farofa, primeiro parametro é o indice e o segundo o valor
+// 	for _, numero := range numeros {
+// 		sum += numero
+// 	}
+// 	return sum
+// }
+
+// Agora ele recebe um slice ao inves de um array
+func Soma(numeros []int) int {
 	sum := 0
-	// Range é tipo a farofa, primeiro parametro é o indice e o segundo o valor
 	for _, numero := range numeros {
 		sum += numero
 	}
