@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"testing"
 )
 
@@ -63,25 +64,44 @@ type Forma interface {
 
 // TDT - table driven test
 
+// func TestArea(t *testing.T) {
+// 	testesArea := []struct { // Isso é um array de struct
+// 		// Primeiro é definido o formato da struct
+// 		forma    Forma
+// 		esperado float64
+// 	}{
+// 		// Depois os valores do array
+// 		{Retangulo{12, 6}, 72.0},
+// 		// Está encapsulado em um objeto... mas ainda não captei o porque
+// 		// Okay, tu passa entre {} porque o formato da struct é um objeto, então ele faz um auto assign
+// 		// Primeiro parametro é a forma e o segundo o valor esperado
+// 		{Circulo{10}, 314.1592653589793},
+// 	}
+
+// 	for _, tt := range testesArea {
+// 		resultado := tt.forma.Area()
+
+// 		if resultado != tt.esperado {
+// 			t.Errorf("resultado %.2f, esperado %.2f", resultado, tt.esperado)
+// 		}
+// 	}
+// }
+
 func TestArea(t *testing.T) {
-	testesArea := []struct { // Isso é um array de struct
-		// Primeiro é definido o formato da struct
+	testesArea := []struct {
 		forma    Forma
 		esperado float64
 	}{
-		// Depois os valores do array
-		{Retangulo{12, 6}, 72.0},
-		// Está encapsulado em um objeto... mas ainda não captei o porque
-		// Okay, tu passa entre {} porque o formato da struct é um objeto, então ele faz um auto assign
-		// Primeiro parametro é a forma e o segundo o valor esperado
-		{Circulo{10}, 314.1592653589793},
+		{Retangulo{Largura: 12, Altura: 6}, 72.0},
+		{Circulo{Raio: 10}, 314.1592653589793},
+		{Triangulo{Base: 12, Altura: 6}, 36.0},
 	}
 
 	for _, tt := range testesArea {
 		resultado := tt.forma.Area()
-
 		if resultado != tt.esperado {
 			t.Errorf("resultado %.2f, esperado %.2f", resultado, tt.esperado)
+			fmt.Printf("Forma testada: %#v\n ", tt.forma)
 		}
 	}
 }
