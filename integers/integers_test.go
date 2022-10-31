@@ -19,3 +19,18 @@ func ExampleSum() {
 	fmt.Println(result)
 	// Output: 20
 }
+
+func TestDivide(t *testing.T) {
+	result := Divide(10, 5)
+	expected := 2
+
+	if result != expected {
+		t.Errorf("result '%d', expected '%d'", result, expected)
+	}
+}
+
+func ExampleDivide() {
+	result := Divide(10, 5)
+	fmt.Println(result)
+	// Output: 2
+}
