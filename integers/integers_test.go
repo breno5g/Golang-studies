@@ -34,3 +34,18 @@ func ExampleDivide() {
 	fmt.Println(result)
 	// Output: 2
 }
+
+func TestRest(t *testing.T) {
+	result := Rest(7, 2)
+	expected := 1
+
+	if result != expected {
+		t.Errorf("result '%d', expected '%d'", result, expected)
+	}
+}
+
+func ExampleRest() {
+	result := Rest(7, 2)
+	fmt.Println(result)
+	// Output: 1
+}
