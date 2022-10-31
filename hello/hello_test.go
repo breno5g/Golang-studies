@@ -15,7 +15,7 @@ func TestHello(t *testing.T) {
 	}
 
 	t.Run("Say hello with parameter", func(t *testing.T) {
-		result := Hello("Breno")
+		result := Hello("Breno", "")
 		expected := "Hello, Breno"
 
 		// t param is required because helper function doesn't have access to to t
@@ -23,9 +23,23 @@ func TestHello(t *testing.T) {
 	})
 
 	t.Run("Return default response with no parameter", func(t *testing.T) {
-		result := Hello("")
+		result := Hello("", "")
 		expected := "Hello, World"
 
 		verifyMessage(t, result, expected)
+	})
+
+	t.Run("Say hello in portuguese", func(t *testing.T) {
+		result := Hello("Breno", "pt-br")
+		expect := "Olá, Breno"
+
+		verifyMessage(t, result, expect)
+	})
+
+	t.Run("Say hello in french", func(t *testing.T) {
+		result := Hello("Breno", "fr")
+		expect := "Bonjour, Breno"
+
+		verifyMessage(t, result, expect)
 	})
 }
