@@ -6,10 +6,6 @@ import (
 	"testing"
 )
 
-func TestSumArray(t *testing.T) {
-
-}
-
 func TestArray(t *testing.T) {
 	t.Run("Collection with any size", func(t *testing.T) {
 		numbers := []int{1, 2, 3, 4, 5}
@@ -42,21 +38,24 @@ func TestSumMultiplesArrays(t *testing.T) {
 }
 
 func TestSumMultiplesArraysRest(t *testing.T) {
+	logger := func(t *testing.T, result, expected []int) {
+		t.Helper()
+		if !reflect.DeepEqual(result, expected) {
+			t.Errorf("result %v expected %v", result, expected)
+		}
+	}
+
 	t.Run("with two arrays full of values", func(t *testing.T) {
 		result := SumMultiplesArraysRest([]int{1, 2, 3}, []int{0, 9})
 		expected := []int{5, 9}
 
-		if !reflect.DeepEqual(result, expected) {
-			t.Errorf("result %v expected %v", result, expected)
-		}
+		logger(t, result, expected)
 	})
 
 	t.Run("with empty arrays", func(t *testing.T) {
 		result := SumMultiplesArraysRest([]int{}, []int{})
 		expected := []int{0, 0}
 
-		if !reflect.DeepEqual(result, expected) {
-			t.Errorf("result %v expected %v", result, expected)
-		}
+		logger(t, result, expected)
 	})
 }
