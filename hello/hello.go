@@ -2,8 +2,13 @@ package hello
 
 import "fmt"
 
+const prefixInEnglish = "Hello, "
+
 func Hello(name string) string {
-	return "Hello, " + name
+	if name == "" {
+		name = "World"
+	}
+	return prefixInEnglish + name
 }
 
 func main() {
