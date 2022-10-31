@@ -1,8 +1,11 @@
 package iteration
 
-func Repeat(value string) string {
+func Repeat(value string, iteration int) string {
 	var result string
-	for i := 0; i < 5; i++ {
+	if iteration == 0 {
+		iteration = 5
+	}
+	for i := 0; i < iteration; i++ {
 		result += value
 	}
 
