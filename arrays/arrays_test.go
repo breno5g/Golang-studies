@@ -2,6 +2,7 @@ package arrays
 
 import (
 	"fmt"
+	"reflect"
 	"testing"
 )
 
@@ -28,4 +29,14 @@ func ExampleSumArray() {
 	result := SumArray(numbers)
 	fmt.Println(result)
 	// Output: 15
+}
+
+func TestSumMultiplesArrays(t *testing.T) {
+	result := SumMultiplesArrays([]int{1, 2}, []int{0, 9})
+	expected := []int{3, 9}
+
+	// DeepEqual comparison because compare two arrays is not possible
+	if !reflect.DeepEqual(result, expected) {
+		t.Errorf("result %v expected %v", result, expected)
+	}
 }
