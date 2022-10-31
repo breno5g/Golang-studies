@@ -40,3 +40,23 @@ func TestSumMultiplesArrays(t *testing.T) {
 		t.Errorf("result %v expected %v", result, expected)
 	}
 }
+
+func TestSumMultiplesArraysRest(t *testing.T) {
+	t.Run("with two arrays full of values", func(t *testing.T) {
+		result := SumMultiplesArraysRest([]int{1, 2, 3}, []int{0, 9})
+		expected := []int{5, 9}
+
+		if !reflect.DeepEqual(result, expected) {
+			t.Errorf("result %v expected %v", result, expected)
+		}
+	})
+
+	t.Run("with empty arrays", func(t *testing.T) {
+		result := SumMultiplesArraysRest([]int{}, []int{})
+		expected := []int{0, 0}
+
+		if !reflect.DeepEqual(result, expected) {
+			t.Errorf("result %v expected %v", result, expected)
+		}
+	})
+}

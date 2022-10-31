@@ -36,3 +36,18 @@ func SumMultiplesArrays(numbers ...[]int) []int {
 
 	return sums
 }
+
+func SumMultiplesArraysRest(numbers ...[]int) []int {
+	var sums []int
+
+	for _, numbersArr := range numbers {
+		if len(numbersArr) == 0 {
+			sums = append(sums, 0)
+		} else {
+			final := numbersArr[1:]
+			sums = append(sums, SumArray(final))
+		}
+	}
+
+	return sums
+}
