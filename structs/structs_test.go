@@ -42,19 +42,22 @@ func TestArea(t *testing.T) {
 	areasToTest := []struct {
 		shape    Shape
 		expected float64
+		name     string
 	}{
 		// Values of the struct array, shape and expected value
-		{shape: Rectangle{10.0, 10.0}, expected: 100.0},
-		{shape: Circle{10.0}, expected: 314.1592653589793},
-		{shape: Triangle{10, 10}, expected: 50},
+		{name: "Rectangle", shape: Rectangle{10.0, 10.0}, expected: 100.0},
+		{name: "Circle", shape: Circle{10.0}, expected: 314.1592653589793},
+		{name: "Triangle", shape: Triangle{10, 10}, expected: 50},
 	}
 
 	// Get shape of area array
 	for _, tt := range areasToTest {
-		result := tt.shape.Area()
+		t.Run(tt.name, func(t *testing.T) {
+			result := tt.shape.Area()
 
-		if result != tt.expected {
-			t.Errorf("result %.2f, expected %.2f", result, tt.expected)
-		}
+			if result != tt.expected {
+				t.Errorf("tested value %v, result %.2f, expected %.2f", tt.shape, result, tt.expected)
+			}
+		})
 	}
 }
