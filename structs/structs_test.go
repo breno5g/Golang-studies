@@ -44,8 +44,9 @@ func TestArea(t *testing.T) {
 		expected float64
 	}{
 		// Values of the struct array, shape and expected value
-		{Rectangle{10.0, 10.0}, 100.0},
-		{Circle{10.0}, 314.1592653589793},
+		{shape: Rectangle{10.0, 10.0}, expected: 100.0},
+		{shape: Circle{10.0}, expected: 314.1592653589793},
+		{shape: Triangle{10, 10}, expected: 50},
 	}
 
 	// Get shape of area array
