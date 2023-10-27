@@ -14,14 +14,14 @@ func main() {
 	// fmt.Println(msg)
 
 	// Second test
-	// ch := make(chan string)
-	// go publish(ch)
-	// reader(ch)
+	ch := make(chan string)
+	go publish(ch)
+	reader(ch)
 
 	// Third test
-	ch := make(chan string)
-	go read(ch)
-	write("Hello from another thread", ch)
+	// ch := make(chan string)
+	// go read(ch)
+	// write("Hello from another thread", ch)
 }
 
 func reader(ch chan string) {
@@ -38,12 +38,12 @@ func publish(ch chan string) {
 	close(ch)
 }
 
-// receive data
-func read(ch <-chan string) {
-	fmt.Println(<-ch)
-}
+// // receive data
+// func read(ch <-chan string) {
+// 	fmt.Println(<-ch)
+// }
 
-// adding data
-func write(name string, ch chan<- string) {
-	ch <- name
-}
+// // adding data
+// func write(name string, ch chan<- string) {
+// 	ch <- name
+// }
