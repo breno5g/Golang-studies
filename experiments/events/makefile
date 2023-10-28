@@ -3,10 +3,10 @@
 default: run
 
 run:
-	@go run main.go
+	@go run cmd/consumer/main.go
 
 race:
-	@go run --race main.go
+	@go run --race cmd/consumer/main.go
 
 test:
 	@go test -v ./...
