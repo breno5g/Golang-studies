@@ -40,6 +40,29 @@ func (ed *EventDispatcher) Has(eventName string, handler EventHandlerInterface) 
 	return false
 }
 
+func (ed *EventDispatcher) Dispatch(event EventInterface) error {
+	handlers, ok := ed.handlers[event.GetName()]
+	if ok {
+		for _, handler := range handlers {
+			handler.Handle(event)
+		}
+	}
+	return nil
+}
+
+func (ed *EventDispatcher) Remove(eventName string, handler EventHandlerInterface) error {
+	_, ok := ed.handlers[eventName]
+	if ok {
+		for i, h := range ed.handlers[eventName] {
+			if h == handler {
+				ed.handlers[eventName] = append(ed.handlers[eventName][:i], ed.handlers[eventName][i+1:]...)
+				return nil
+			}
+		}
+	}
+	return nil
+}
+
 func (ed *EventDispatcher) Clear() {
 	ed.handlers = make(map[string][]EventHandlerInterface)
 }
