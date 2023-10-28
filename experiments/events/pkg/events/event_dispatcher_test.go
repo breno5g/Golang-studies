@@ -5,6 +5,7 @@ import (
 	"time"
 
 	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/mock"
 	"github.com/stretchr/testify/suite"
 )
 
@@ -110,6 +111,52 @@ func (suite *EventDispatcherTestSuite) TestEventDispatcher_Has() {
 
 	suite.True(suite.eventDispatcher.Has(suite.event.GetName(), &suite.handler))
 	suite.True(suite.eventDispatcher.Has(suite.event2.GetName(), &suite.handler3))
+}
+
+type MockHandler struct {
+	mock.Mock
+}
+
+func (m *MockHandler) Handle(event EventInterface) {
+	m.Called(event)
+}
+
+func (suite *EventDispatcherTestSuite) TestEventDispatch_Dispatch() {
+	eventHandlerMock := &MockHandler{}
+	eventHandlerMock.On("Handle", &suite.event)
+
+	suite.eventDispatcher.Register(suite.event.GetName(), eventHandlerMock)
+
+	suite.eventDispatcher.Dispatch(&suite.event)
+	eventHandlerMock.AssertExpectations(suite.T())
+	eventHandlerMock.AssertNumberOfCalls(suite.T(), "Handle", 1)
+}
+
+func (suite *EventDispatcherTestSuite) TestEventDispatcher_Remove() {
+	// Event 1
+	err := suite.eventDispatcher.Register(suite.event.GetName(), &suite.handler)
+	suite.Nil(err)
+	suite.Equal(1, len(suite.eventDispatcher.handlers[suite.event.GetName()]))
+
+	err = suite.eventDispatcher.Register(suite.event.GetName(), &suite.handler2)
+	suite.Nil(err)
+	suite.Equal(2, len(suite.eventDispatcher.handlers[suite.event.GetName()]))
+
+	// Event 2
+	err = suite.eventDispatcher.Register(suite.event2.GetName(), &suite.handler3)
+	suite.Nil(err)
+	suite.Equal(1, len(suite.eventDispatcher.handlers[suite.event2.GetName()]))
+
+	suite.eventDispatcher.Remove(suite.event.GetName(), &suite.handler)
+	suite.Equal(1, len(suite.eventDispatcher.handlers[suite.event.GetName()]))
+	assert.Equal(suite.T(), &suite.handler2, suite.eventDispatcher.handlers[suite.event.GetName()][0])
+
+	suite.eventDispatcher.Remove(suite.event.GetName(), &suite.handler2)
+	suite.Equal(0, len(suite.eventDispatcher.handlers[suite.event.GetName()]))
+
+	suite.eventDispatcher.Remove(suite.event2.GetName(), &suite.handler3)
+	suite.Equal(0, len(suite.eventDispatcher.handlers[suite.event2.GetName()]))
+
 }
 
 func TestSuite(t *testing.T) {
